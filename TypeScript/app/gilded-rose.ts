@@ -50,9 +50,13 @@ export class Item {
     }
 
     private computeQualityAdjustmentFactor(): number {
-        if (this.isAgedBrie() || this.isBackstagePass()) return 1;
+        if (this.shouldIncreaseQuality()) return 1;
 
         return -1;
+    }
+
+    private shouldIncreaseQuality(): boolean {
+        return this.isAgedBrie() || this.isBackstagePass();
     }
 
     private isSulfuras() {
