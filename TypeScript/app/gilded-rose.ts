@@ -10,11 +10,14 @@ export class Item {
     }
 
     update() {
+        this.updateSellIn();
+        this.updateQuality();
+    }
+
+    private updateSellIn() {
         if (!this.isSulfuras()) {
             this.sellIn = this.sellIn - 1;
         }
-
-        this.updateQuality();
     }
 
     private updateQuality() {
