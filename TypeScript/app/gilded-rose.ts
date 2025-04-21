@@ -10,12 +10,7 @@ export class Item {
     }
 
     update() {
-        if (this.isAgedBrie() || this.isBackstagePass()) {
-            const amount = this.computeAmountToIncreaseQuality();
-            this.increaseQuality(amount);
-        } else {
-            this.decreaseQuality();
-        }
+        this.updateQuality();
 
         if (!this.isSulfuras()) {
             this.sellIn = this.sellIn - 1;
@@ -33,9 +28,19 @@ export class Item {
         }
     }
 
+    private updateQuality() {
+        if (this.isAgedBrie() || this.isBackstagePass()) {
+            const amount = this.computeAmountToIncreaseQuality();
+            this.increaseQuality(amount);
+        } else {
+            this.decreaseQuality();
+        }
+    }
+
     private computeAmountToIncreaseQuality(): number {
         if (this.isBackstagePass() && this.sellIn < 6) return 3;
         if (this.isBackstagePass() && this.sellIn < 11) return 2;
+
         return 1;
     }
 
