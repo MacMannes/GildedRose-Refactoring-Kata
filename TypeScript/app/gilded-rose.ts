@@ -16,10 +16,8 @@ export class Item {
 
         this.updateQuality();
 
-        if (this.sellIn < 0) {
-            if (this.isBackstagePass()) {
-                this.quality = 0;
-            }
+        if (this.sellIn < 0 && this.isBackstagePass()) {
+            this.quality = 0;
         }
     }
 
