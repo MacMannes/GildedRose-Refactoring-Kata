@@ -32,9 +32,10 @@ export class Item {
         if (this.isAgedBrie() || this.isBackstagePass()) {
             const amount = this.computeAmountToIncreaseQuality();
             this.increaseQuality(amount);
-        } else {
-            this.decreaseQuality();
+            return;
         }
+
+        this.decreaseQuality();
     }
 
     private computeAmountToIncreaseQuality(): number {
