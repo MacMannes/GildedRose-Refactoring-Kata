@@ -10,20 +10,15 @@ export class Item {
     }
 
     update() {
-        this.updateQuality();
-
         if (!this.isSulfuras()) {
             this.sellIn = this.sellIn - 1;
         }
+
+        this.updateQuality();
+
         if (this.sellIn < 0) {
-            if (this.isAgedBrie()) {
-                this.increaseQuality();
-            } else {
-                if (this.isBackstagePass()) {
-                    this.quality = 0;
-                } else {
-                    this.decreaseQuality();
-                }
+            if (this.isBackstagePass()) {
+                this.quality = 0;
             }
         }
     }
@@ -40,13 +35,17 @@ export class Item {
     }
 
     private computeAmountToIncreaseQuality(): number {
-        if (this.isBackstagePass() && this.sellIn < 6) return 3;
-        if (this.isBackstagePass() && this.sellIn < 11) return 2;
+        if (this.isBackstagePass() && this.sellIn < 5) return 3;
+        if (this.isBackstagePass() && this.sellIn < 10) return 2;
+
+        if (this.sellIn < 0) return 2;
 
         return 1;
     }
 
     private computeAmountToDecreaseQuality(): number {
+        if (this.sellIn < 0) return 2;
+
         return 1;
     }
 
@@ -60,8 +59,10 @@ export class Item {
     private decreaseQuality(amount: number = 1) {
         if (this.isSulfuras()) return;
 
-        if (this.quality > 0) {
-            this.quality = this.quality - amount;
+        this.quality = this.quality - amount;
+
+        if (this.quality < 0) {
+            this.quality = 0;
         }
     }
 
