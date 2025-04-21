@@ -15,9 +15,9 @@ export class Item {
     }
 
     private updateSellIn() {
-        if (!this.isSulfuras()) {
-            this.sellIn = this.sellIn - 1;
-        }
+        if (this.isSulfuras()) return;
+
+        this.sellIn = this.sellIn - 1;
     }
 
     private updateQuality() {
