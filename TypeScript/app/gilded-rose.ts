@@ -10,12 +10,13 @@ export class Item {
     }
 
     update() {
-        if (!this.isAgedBrie() && !this.isBackstagePass()) {
-            this.decreaseQuality();
-        } else {
+        if (this.isAgedBrie() || this.isBackstagePass()) {
             const amount = this.computeAmountToIncreaseQuality();
             this.increaseQuality(amount);
+        } else {
+            this.decreaseQuality();
         }
+
         if (!this.isSulfuras()) {
             this.sellIn = this.sellIn - 1;
         }
