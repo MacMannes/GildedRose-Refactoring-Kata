@@ -35,13 +35,18 @@ export class Item {
             return;
         }
 
-        this.decreaseQuality();
+        const amount = this.computeAmountToDecreaseQuality();
+        this.decreaseQuality(amount);
     }
 
     private computeAmountToIncreaseQuality(): number {
         if (this.isBackstagePass() && this.sellIn < 6) return 3;
         if (this.isBackstagePass() && this.sellIn < 11) return 2;
 
+        return 1;
+    }
+
+    private computeAmountToDecreaseQuality(): number {
         return 1;
     }
 
