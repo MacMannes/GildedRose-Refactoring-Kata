@@ -61,11 +61,7 @@ export class Item {
     private decreaseQuality(amount: number = 1) {
         if (this.isSulfuras()) return;
 
-        this.quality = this.quality - amount;
-
-        if (this.quality < 0) {
-            this.quality = 0;
-        }
+        this.quality = Math.max(0, this.quality - amount);
     }
 
     private isSulfuras() {
