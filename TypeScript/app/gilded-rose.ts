@@ -13,9 +13,7 @@ export class Item {
         if (!this.isAgedBrie() && !this.isBackstagePass()) {
             this.decreaseQuality();
         } else {
-            if (this.quality < 50) {
-                this.quality = this.quality + 1;
-            }
+            this.increaseQuality();
             if (this.isBackstagePass()) {
                 if (this.sellIn < 11) {
                     this.increaseQuality();
