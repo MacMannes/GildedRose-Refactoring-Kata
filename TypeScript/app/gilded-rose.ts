@@ -28,11 +28,11 @@ export class Item {
             return;
         }
 
-        const amount = this.computeAmountToAdjustQuality();
+        const amount = this.computeQualityAdjustment();
         this.adjustQuality(amount);
     }
 
-    private computeAmountToAdjustQuality(): number {
+    private computeQualityAdjustment(): number {
         if (this.isBackstagePass() && this.sellIn < 5) return 3;
         if (this.isBackstagePass() && this.sellIn < 10) return 2;
 
