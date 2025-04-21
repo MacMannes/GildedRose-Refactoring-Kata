@@ -28,19 +28,11 @@ export class Item {
             return;
         }
 
-        let amount = 0;
-
-        if (this.isAgedBrie() || this.isBackstagePass()) {
-            amount = this.computeAmountToIncreaseQuality();
-            this.adjustQuality(amount);
-            return;
-        }
-
-        amount = this.computeAmountToDecreaseQuality() * -1;
+        const amount = this.computeAmountToAdjustQuality();
         this.adjustQuality(amount);
     }
 
-    private computeAmountToIncreaseQuality(): number {
+    private computeAmountToAdjustQuality(): number {
         if (this.isBackstagePass() && this.sellIn < 5) return 3;
         if (this.isBackstagePass() && this.sellIn < 10) return 2;
 
@@ -49,14 +41,18 @@ export class Item {
         return 1;
     }
 
-    private computeAmountToDecreaseQuality(): number {
-        if (this.sellIn < 0) return 2;
-
-        return 1;
+    private adjustQuality(amount: number) {
+        const adjustmentFactor = this.computeQualityAdjustmentFactor();
+        this.quality = Math.max(
+            0,
+            Math.min(this.quality + amount * adjustmentFactor, 50),
+        );
     }
 
-    private adjustQuality(amount: number) {
-        this.quality = Math.max(0, Math.min(this.quality + amount, 50));
+    private computeQualityAdjustmentFactor(): number {
+        if (this.isAgedBrie() || this.isBackstagePass()) return 1;
+
+        return -1;
     }
 
     private isSulfuras() {
