@@ -10,19 +10,17 @@ export class Item {
     }
 
     update() {
+        if (this.isSulfuras()) return;
+
         this.updateSellIn();
         this.updateQuality();
     }
 
     private updateSellIn() {
-        if (this.isSulfuras()) return;
-
         this.sellIn = this.sellIn - 1;
     }
 
     private updateQuality() {
-        if (this.isSulfuras()) return;
-
         if (this.sellIn < 0 && this.isBackstagePass()) {
             this.quality = 0;
             return;
