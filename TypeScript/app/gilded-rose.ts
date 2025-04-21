@@ -11,11 +11,7 @@ export class Item {
 
     update() {
         if (!this.isAgedBrie() && !this.isBackstagePass()) {
-            if (this.quality > 0) {
-                if (!this.isSulfuras()) {
-                    this.quality = this.quality - 1;
-                }
-            }
+            this.decreaseQuality();
         } else {
             if (this.quality < 50) {
                 this.quality = this.quality + 1;
@@ -35,16 +31,20 @@ export class Item {
         if (this.sellIn < 0) {
             if (!this.isAgedBrie()) {
                 if (!this.isBackstagePass()) {
-                    if (this.quality > 0) {
-                        if (!this.isSulfuras()) {
-                            this.quality = this.quality - 1;
-                        }
-                    }
+                    this.decreaseQuality();
                 } else {
                     this.quality = 0;
                 }
             } else {
                 this.increaseQuality();
+            }
+        }
+    }
+
+    private decreaseQuality() {
+        if (this.quality > 0) {
+            if (!this.isSulfuras()) {
+                this.quality = this.quality - 1;
             }
         }
     }
