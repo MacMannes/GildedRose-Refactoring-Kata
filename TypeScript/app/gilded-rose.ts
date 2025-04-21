@@ -33,14 +33,6 @@ export class Item {
         }
     }
 
-    private decreaseQuality() {
-        if (this.isSulfuras()) return;
-
-        if (this.quality > 0) {
-            this.quality = this.quality - 1;
-        }
-    }
-
     private computeAmountToIncreaseQuality(): number {
         if (this.isBackstagePass() && this.sellIn < 6) return 3;
         if (this.isBackstagePass() && this.sellIn < 11) return 2;
@@ -51,6 +43,14 @@ export class Item {
         this.quality = this.quality + amount;
         if (this.quality > 50) {
             this.quality = 50;
+        }
+    }
+
+    private decreaseQuality() {
+        if (this.isSulfuras()) return;
+
+        if (this.quality > 0) {
+            this.quality = this.quality - 1;
         }
     }
 
