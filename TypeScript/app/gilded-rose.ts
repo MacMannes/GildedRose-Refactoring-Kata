@@ -8,24 +8,8 @@ export class Item {
         this.sellIn = sellIn;
         this.quality = quality;
     }
-}
 
-export class GildedRose {
-    items: Array<Item>;
-
-    constructor(items = [] as Array<Item>) {
-        this.items = items;
-    }
-
-    updateQuality() {
-        for (let i = 0; i < this.items.length; i++) {
-            this.updateItem(this.items[i]);
-        }
-
-        return this.items;
-    }
-
-    private updateItem(item: Item) {
+    updateItem(item: Item) {
         if (
             item.name != 'Aged Brie' &&
             item.name != 'Backstage passes to a TAFKAL80ETC concert'
@@ -72,5 +56,22 @@ export class GildedRose {
                 }
             }
         }
+    }
+}
+
+export class GildedRose {
+    items: Array<Item>;
+
+    constructor(items = [] as Array<Item>) {
+        this.items = items;
+    }
+
+    updateQuality() {
+        for (let i = 0; i < this.items.length; i++) {
+            const item = this.items[i];
+            item.updateItem(item);
+        }
+
+        return this.items;
     }
 }
