@@ -21,14 +21,14 @@ export class Item {
             this.sellIn = this.sellIn - 1;
         }
         if (this.sellIn < 0) {
-            if (!this.isAgedBrie()) {
-                if (!this.isBackstagePass()) {
-                    this.decreaseQuality();
-                } else {
-                    this.quality = 0;
-                }
-            } else {
+            if (this.isAgedBrie()) {
                 this.increaseQuality();
+            } else {
+                if (this.isBackstagePass()) {
+                    this.quality = 0;
+                } else {
+                    this.decreaseQuality();
+                }
             }
         }
     }
