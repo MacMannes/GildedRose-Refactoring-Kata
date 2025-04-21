@@ -51,11 +51,11 @@ export class Item {
         }
     }
 
-    private decreaseQuality() {
+    private decreaseQuality(amount: number = 1) {
         if (this.isSulfuras()) return;
 
         if (this.quality > 0) {
-            this.quality = this.quality - 1;
+            this.quality = this.quality - amount;
         }
     }
 
