@@ -28,14 +28,16 @@ export class Item {
             return;
         }
 
+        let amount = 0;
+
         if (this.isAgedBrie() || this.isBackstagePass()) {
-            const amount = this.computeAmountToIncreaseQuality();
-            this.increaseQuality(amount);
+            amount = this.computeAmountToIncreaseQuality();
+            this.adjustQuality(amount);
             return;
         }
 
-        const amount = this.computeAmountToDecreaseQuality();
-        this.decreaseQuality(amount);
+        amount = this.computeAmountToDecreaseQuality() * -1;
+        this.adjustQuality(amount);
     }
 
     private computeAmountToIncreaseQuality(): number {
@@ -51,14 +53,6 @@ export class Item {
         if (this.sellIn < 0) return 2;
 
         return 1;
-    }
-
-    private increaseQuality(amount: number = 1) {
-        this.adjustQuality(amount);
-    }
-
-    private decreaseQuality(amount: number = 1) {
-        this.adjustQuality(-amount);
     }
 
     private adjustQuality(amount: number) {
