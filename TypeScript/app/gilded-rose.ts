@@ -47,9 +47,9 @@ export class Item {
         }
     }
 
-    private increaseQuality() {
+    private increaseQuality(amount: number = 1) {
         if (this.quality < 50) {
-            this.quality = this.quality + 1;
+            this.quality = this.quality + amount;
         }
     }
 
