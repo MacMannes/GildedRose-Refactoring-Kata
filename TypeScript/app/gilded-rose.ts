@@ -21,6 +21,8 @@ export class Item {
     }
 
     private updateQuality() {
+        if (this.isSulfuras()) return;
+
         if (this.sellIn < 0 && this.isBackstagePass()) {
             this.quality = 0;
             return;
@@ -52,13 +54,15 @@ export class Item {
     }
 
     private increaseQuality(amount: number = 1) {
-        this.quality = Math.min(this.quality + amount, 50);
+        this.adjustQuality(amount);
     }
 
     private decreaseQuality(amount: number = 1) {
-        if (this.isSulfuras()) return;
+        this.adjustQuality(-amount);
+    }
 
-        this.quality = Math.max(0, this.quality - amount);
+    private adjustQuality(amount: number) {
+        this.quality = Math.max(0, Math.min(this.quality + amount, 50));
     }
 
     private isSulfuras() {
