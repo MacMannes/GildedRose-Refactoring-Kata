@@ -10,10 +10,7 @@ export class Item {
     }
 
     update() {
-        if (
-            this.name != 'Aged Brie' &&
-            this.name != 'Backstage passes to a TAFKAL80ETC concert'
-        ) {
+        if (this.name != 'Aged Brie' && !this.isBackstagePass()) {
             if (this.quality > 0) {
                 if (this.name != 'Sulfuras, Hand of Ragnaros') {
                     this.quality = this.quality - 1;
@@ -22,7 +19,7 @@ export class Item {
         } else {
             if (this.quality < 50) {
                 this.quality = this.quality + 1;
-                if (this.name == 'Backstage passes to a TAFKAL80ETC concert') {
+                if (this.isBackstagePass()) {
                     if (this.sellIn < 11) {
                         if (this.quality < 50) {
                             this.quality = this.quality + 1;
@@ -41,7 +38,7 @@ export class Item {
         }
         if (this.sellIn < 0) {
             if (this.name != 'Aged Brie') {
-                if (this.name != 'Backstage passes to a TAFKAL80ETC concert') {
+                if (!this.isBackstagePass()) {
                     if (this.quality > 0) {
                         if (this.name != 'Sulfuras, Hand of Ragnaros') {
                             this.quality = this.quality - 1;
@@ -56,6 +53,10 @@ export class Item {
                 }
             }
         }
+    }
+
+    private isBackstagePass() {
+        return this.name == 'Backstage passes to a TAFKAL80ETC concert';
     }
 }
 
