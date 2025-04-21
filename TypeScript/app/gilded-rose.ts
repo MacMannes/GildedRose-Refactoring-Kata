@@ -21,14 +21,10 @@ export class Item {
                 this.quality = this.quality + 1;
                 if (this.isBackstagePass()) {
                     if (this.sellIn < 11) {
-                        if (this.quality < 50) {
-                            this.quality = this.quality + 1;
-                        }
+                        this.increaseQuality();
                     }
                     if (this.sellIn < 6) {
-                        if (this.quality < 50) {
-                            this.quality = this.quality + 1;
-                        }
+                        this.increaseQuality();
                     }
                 }
             }
@@ -48,10 +44,14 @@ export class Item {
                     this.quality = 0;
                 }
             } else {
-                if (this.quality < 50) {
-                    this.quality = this.quality + 1;
-                }
+                this.increaseQuality();
             }
+        }
+    }
+
+    private increaseQuality() {
+        if (this.quality < 50) {
+            this.quality = this.quality + 1;
         }
     }
 
