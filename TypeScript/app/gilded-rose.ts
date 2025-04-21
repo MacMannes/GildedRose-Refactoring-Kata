@@ -10,7 +10,7 @@ export class Item {
     }
 
     update() {
-        if (this.name != 'Aged Brie' && !this.isBackstagePass()) {
+        if (!this.isAgedBrie() && !this.isBackstagePass()) {
             if (this.quality > 0) {
                 if (this.name != 'Sulfuras, Hand of Ragnaros') {
                     this.quality = this.quality - 1;
@@ -37,7 +37,7 @@ export class Item {
             this.sellIn = this.sellIn - 1;
         }
         if (this.sellIn < 0) {
-            if (this.name != 'Aged Brie') {
+            if (!this.isAgedBrie()) {
                 if (!this.isBackstagePass()) {
                     if (this.quality > 0) {
                         if (this.name != 'Sulfuras, Hand of Ragnaros') {
@@ -53,6 +53,10 @@ export class Item {
                 }
             }
         }
+    }
+
+    private isAgedBrie() {
+        return this.name == 'Aged Brie';
     }
 
     private isBackstagePass() {
