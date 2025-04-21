@@ -15,13 +15,14 @@ export class Item {
         }
 
         this.updateQuality();
-
-        if (this.sellIn < 0 && this.isBackstagePass()) {
-            this.quality = 0;
-        }
     }
 
     private updateQuality() {
+        if (this.sellIn < 0 && this.isBackstagePass()) {
+            this.quality = 0;
+            return;
+        }
+
         if (this.isAgedBrie() || this.isBackstagePass()) {
             const amount = this.computeAmountToIncreaseQuality();
             this.increaseQuality(amount);
