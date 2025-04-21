@@ -13,15 +13,8 @@ export class Item {
         if (!this.isAgedBrie() && !this.isBackstagePass()) {
             this.decreaseQuality();
         } else {
-            this.increaseQuality();
-            if (this.isBackstagePass()) {
-                if (this.sellIn < 11) {
-                    this.increaseQuality();
-                }
-                if (this.sellIn < 6) {
-                    this.increaseQuality();
-                }
-            }
+            const amount = this.computeAmountToIncreaseQuality();
+            this.increaseQuality(amount);
         }
         if (!this.isSulfuras()) {
             this.sellIn = this.sellIn - 1;
@@ -39,6 +32,12 @@ export class Item {
         }
     }
 
+    private computeAmountToIncreaseQuality(): number {
+        if (this.isBackstagePass() && this.sellIn < 6) return 3;
+        if (this.isBackstagePass() && this.sellIn < 11) return 2;
+        return 1;
+    }
+
     private decreaseQuality() {
         if (this.isSulfuras()) return;
 
@@ -48,8 +47,9 @@ export class Item {
     }
 
     private increaseQuality(amount: number = 1) {
-        if (this.quality < 50) {
-            this.quality = this.quality + amount;
+        this.quality = this.quality + amount;
+        if (this.quality > 50) {
+            this.quality = 50;
         }
     }
 
