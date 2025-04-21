@@ -52,10 +52,7 @@ export class Item {
     }
 
     private increaseQuality(amount: number = 1) {
-        this.quality = this.quality + amount;
-        if (this.quality > 50) {
-            this.quality = 50;
-        }
+        this.quality = Math.min(this.quality + amount, 50);
     }
 
     private decreaseQuality(amount: number = 1) {
